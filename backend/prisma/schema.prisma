@@ -1,0 +1,13 @@
+// TripPlanner Prisma schema
+// See ../../backend.md for the full data model design (User, Trip, Day, Activity).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// TODO: define User, Trip, Day, Activity models
