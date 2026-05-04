@@ -1,6 +1,6 @@
 import prisma from '../../lib/prisma';
 import { hashPassword, comparePassword } from '../../lib/password';
-import { signAccessToken, signRefreshToken } from '../../lib/jwt';
+import { signAccessToken, signRefreshToken, verifyRefreshToken } from '../../lib/jwt';
 import { HttpError } from '../../middleware/error';
 import { z } from 'zod';
 import { registerSchema, loginSchema } from './auth.schema';
@@ -49,4 +49,19 @@ export async function loginUser(data: LoginInput) {
     accessToken: signAccessToken(payload),
     refreshToken: signRefreshToken(payload),
   };
+}
+
+export async function refreshAccessToken(token: string) {
+  try {
+    const payload = verifyRefreshToken(token);
+    
+    const newAccessToken = signAccessToken({ 
+      sub: payload.sub, 
+      email: payload.email 
+    });
+
+    return { accessToken: newAccessToken };
+  } catch (error) {
+    throw new HttpError(401, 'Invalid or expired refresh token');
+  }
 }

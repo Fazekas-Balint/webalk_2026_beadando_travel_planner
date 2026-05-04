@@ -56,3 +56,18 @@ export async function me(req: Request, res: Response, next: NextFunction) {
     next(error);
   }
 }
+
+export async function refresh(req: Request, res: Response, next: NextFunction) {
+  try {
+    const token = req.cookies?.refreshToken;
+    
+    if (!token) {
+      return res.status(401).json({ error: 'No refresh token provided' });
+    }
+
+    const result = await authService.refreshAccessToken(token);
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+}
