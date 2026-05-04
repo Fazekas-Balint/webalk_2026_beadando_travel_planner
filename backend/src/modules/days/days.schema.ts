@@ -1,4 +1,5 @@
-// zod schemas for day-related requests.
-// TODO: define.
+import { z } from 'zod';
 
-export {};
+export const updateDaySchema = z.object({
+  order: z.number().int().optional(),
+});

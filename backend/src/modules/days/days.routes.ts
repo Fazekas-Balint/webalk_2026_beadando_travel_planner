@@ -1,4 +1,14 @@
-// Day routes — nested under /trips/:id when needed.
-// TODO: wire controller handlers if exposing day-level endpoints.
+import { Router } from 'express';
+import { get, update } from './days.controller';
+import { validate } from '../../middleware/validate';
+import { updateDaySchema } from './days.schema';
+import { requireAuth } from '../../middleware/auth';
 
-export {};
+const router = Router();
+
+router.use(requireAuth);
+
+router.get('/:id', get);
+router.patch('/:id', validate(updateDaySchema), update);
+
+export default router;

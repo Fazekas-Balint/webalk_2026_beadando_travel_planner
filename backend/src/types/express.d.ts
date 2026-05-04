@@ -1,4 +1,11 @@
-// Augment Express Request with the authenticated user.
-// TODO: declare global namespace Express { interface Request { user?: ... } }
+import { JwtPayload } from '../lib/jwt';
+
+declare global {
+  namespace Express {
+    export interface Request {
+      user?: JwtPayload;
+    }
+  }
+}
 
 export {};

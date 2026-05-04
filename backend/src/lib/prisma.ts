@@ -1,4 +1,5 @@
-// Prisma client singleton — reused across the app to avoid extra connections.
-// TODO: instantiate and export PrismaClient.
+import { PrismaClient } from '@prisma/client';
 
-export {};
+const prisma = new PrismaClient();
+
+export default prisma;
