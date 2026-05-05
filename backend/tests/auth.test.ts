@@ -21,9 +21,9 @@ describe('Auth Endpoints', () => {
       expect(res.body.user.email).toBe('test@example.com');
       expect(res.body.accessToken).toBeDefined();
 
-      const cookies = res.headers['set-cookie'];
+      const cookies = res.headers['set-cookie'] as string[] | undefined;
       expect(cookies).toBeDefined();
-      expect(cookies[0]).toMatch(/refreshToken=/);
+      expect(cookies![0]).toMatch(/refreshToken=/);
     });
 
     it('should reject weak passwords', async () => {

@@ -21,7 +21,7 @@ export async function list(req: Request, res: Response, next: NextFunction) {
 
 export async function get(req: Request, res: Response, next: NextFunction) {
   try {
-    const trip = await tripsService.getTripById(req.user!.sub, req.params.id);
+    const trip = await tripsService.getTripById(req.user!.sub, req.params.id!);
     res.status(200).json(trip);
   } catch (error) {
     next(error);
@@ -30,7 +30,7 @@ export async function get(req: Request, res: Response, next: NextFunction) {
 
 export async function remove(req: Request, res: Response, next: NextFunction) {
   try {
-    await tripsService.deleteTrip(req.user!.sub, req.params.id);
+    await tripsService.deleteTrip(req.user!.sub, req.params.id!);
     res.status(204).send();
   } catch (error) {
     next(error);
