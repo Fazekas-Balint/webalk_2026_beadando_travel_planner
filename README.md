@@ -39,7 +39,7 @@ Másold át a sablont és töltsd ki:
 ```bash
 cp backend/.env.example backend/.env
 ```
-
+# AI generált README
 Sablon:
 
 ```env
